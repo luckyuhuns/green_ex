@@ -1,0 +1,22 @@
+/*.img-thumbnail img {*/
+/*  width: 80%;*/
+   
+/*}*/
+
+#show-thumbnail{
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.img-thumbnail .caption-full{
+    padding: 10px;
+}
+
+#formInline{
+    display: inline;
+}
+
+#alertContainer{
+    margin-top: 1rem;
+}
