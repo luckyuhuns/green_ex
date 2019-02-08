@@ -17,12 +17,14 @@ var express     = require("express"),
         campgroundRoutes =   require("./routes/campgrounds"),
         indexRoutes       =   require("./routes/index");
     
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
 //mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
-mongoose.connect("mongodb://luckyuhuns:meanduiloveu119@ds153869.mlab.com:53869/lucky_yelpcamp", { useNewUrlParser: true });
-//mongodb:luckyuhuns:meanduiloveu119@ds153869.mlab.com:53869/lucky_yelpcamp
+//mongoose.connect("mongodb://luckyuhuns:meanduiloveu119@ds153869.mlab.com:53869/lucky_yelpcamp", { useNewUrlParser: true });
+console.log(process.env);
+
 var app  = express();
 app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); 
 app.use(flash());
 
    
