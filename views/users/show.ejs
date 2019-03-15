@@ -1,0 +1,30 @@
+<% include ../partials/header%>
+
+<div class="container">
+<div class="row" style= "display: flex; flex-wrap: wrap;">
+    <div class="col-md-4" >
+        <h1><%= user.firstName+" "+user.lastName%></h1>
+        <div class="img-thumbnail img-fluid">
+            <img  src="<%=user.avatar%>" alt="user profile image">
+            <div class="caption"><a href="mailto:<%= user.email%>"><%= user.email%></a></div>
+        </div>
+        huck beef bacon rump buffalo landjaeger ribeye short ribs boudin prosciutto ground round pork belly meatloaf.
+        Alcatra andouille cow brisket chicken beef ribs flank beef. Boudin pastrami hamburger frankfurter burgdoggen, 
+        landjaeger tail. Kielbasa filet mignon pork chop bresaola pork belly, meatloaf meatball sirloin
+        short ribs pig rump turkey 
+    </div>
+    
+            <div class= "col-md-3 col-sm-4">
+                <h5><%= user.username%>'s Campgrounds</h5>
+                <% campgrounds.forEach(function(campground){ %>
+                    <div>
+                        <a href="/campgrounds/<%= campground._id %>"><img class="img-thumbnail img-fluid"  src= "<%=campground.image%>"></a>
+                        <h4 class= "caption text-center"><%= campground.name %></h4>
+                    </div>
+            </div>     
+
+    <% }) %>
+  
+</div>
+</div>
+<% include ../partials/footer%>

@@ -47,7 +47,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
     Campground.findById(req.params.id, function(err, foundCampground) {
         if(err || !foundCampground){
             req.flash("error", "No campground found");
-            return res.redirect("back");
+            return res.redirect("/campgrounds");
         }
         Comment.findById(req.params.comment_id, function(err, foundComment){
             if(err){

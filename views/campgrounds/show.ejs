@@ -9,6 +9,7 @@
                 <li class="list-group-item">info 2</li>
                 <li class="list-group-item">info 3</li>
             </div>
+            <div id="map"></div>
         </div>
         <div class="col-md-9">
             <div id="show-thumbnail" class="img-thumbnail">
@@ -18,11 +19,11 @@
                   
                     <h4><a href="/"><%=campground.name%></a></h4>
                     <P>
-                        <em>Submitted By <%= campground.author.username%></em>
+                        <em>Submitted By: <a href="/users/<%= campground.author.id%>"><%= campground.author.username %></a></em>
                     </P>
                     <p><%=campground.description%></p>
                     
-                   <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                   <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                          <a class="btn btn-sm btn-warning" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
                          <form id= "formInline" action= "/campgrounds/<%=campground._id%>?_method=DELETE" method=POST>
                             <button  class= "btn btn-sm btn-danger">Delete</button>
@@ -47,7 +48,7 @@
                             </p>
                             
                            <p><%= comment.text%></p>
-                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                            <a class= "btn btn-sm btn-warning" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
                            <form id="formInline" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
@@ -61,11 +62,32 @@
         
     </div>
 </div>
-
-
-
-
-
-
-
+<script>
+  function initMap() {
+    var lat = <%= campground.lat %>;
+    var lng = <%= campground.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= campground.name %><br />
+      <%= campground.location %></strong>
+      <p><%= campground.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCopq126GQfcBKNoqO2CJQztEWdPVSj0mg&callback=initMap"></script>
 <% include ../partials/footer %>

@@ -1,7 +1,7 @@
-/*.img-thumbnail img {*/
-/*  width: 80%;*/
+.img-thumbnail img {
+  width: 100%;
    
-/*}*/
+}
 
 #show-thumbnail{
     padding: 0;
@@ -19,4 +19,16 @@
 
 #alertContainer{
     margin-top: 1rem;
+}
+
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+
+
+h3{
+    text-align: center;
 }
