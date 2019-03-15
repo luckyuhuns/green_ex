@@ -139,7 +139,7 @@ router.put("/:id", upload.single("image"), function(req, res){
                                 var result = await cloudinary.v2.uploader.upload(req.file.path);
                                 campground.image = result.secure_url;
                                 campground.imageId = result.public_id;
-                        } catch(err){
+                        }catch(err){
                             req.flash("error", err.message);
                             console.log(err);
                             return res.redirect("back");
